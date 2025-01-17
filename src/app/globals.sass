@@ -8,10 +8,24 @@
 
 @media (prefers-color-scheme: dark)
   :root
-    --background: #0a0a0a
+    --background: 10, 10, 10
     --foreground: #ededed
 
 body
   color: var(--foreground)
-  background: var(--background)
+  background: rgb(var(--background))
   font-family: var(--font-signika-negative)
+
+header
+  .menu
+    a
+      @apply transition-opacity duration-150
+      &:has(~ a:hover)
+        opacity: 0.5
+      &:hover ~ a
+        opacity: 0.5
+      &:hover span
+        @apply font-normal
+      span
+        will-change: font-semibold
+        @apply transition-all duration-150
