@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.sass";
+import Header from "@/components/Header";
 
 const signikaNegative = localFont({
   src: "../../public/fonts/SignikaNegative-VariableFont_wght.ttf",
@@ -20,7 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${signikaNegative.variable} antialiased`}>
-        {children}
+        <Header />
+        <div className="pt-20">{children}</div>
       </body>
     </html>
   );
