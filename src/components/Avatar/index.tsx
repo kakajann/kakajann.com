@@ -29,13 +29,13 @@ const Avatar = () => {
   const svgRef = useRef(null);
   const displacementMapRef = useRef(null);
   const cursor = useRef({
-    x: window.innerWidth / 2,
-    y: window.innerHeight / 2,
+    x: 0,
+    y: 0,
   });
   const cachedCursor = useRef({ ...cursor.current });
   const windowSize = useRef({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: 0,
+    height: 0,
   });
 
   useEffect(() => {
