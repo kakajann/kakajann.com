@@ -42,33 +42,22 @@ const BackgroundBlur = ({ children }: PropsWithChildren) => {
           onHover: {
             enable: true,
             mode: "bubble",
+            parallax: {
+              enable: true,
+              force: 60,
+              smooth: 10,
+            },
           },
         },
         modes: {
           trail: {
             delay: 1,
           },
-          attract: {
-            distance: 200,
-            duration: 0.4,
-            easing: "ease-out-quad",
-            maxSpeed: 50,
-          },
-          bounce: {
-            distance: 200,
-          },
           bubble: {
             distance: 400,
-            duration: 2,
+            duration: 5,
             opacity: 0.8,
             size: 60,
-          },
-          repulse: {
-            distance: 200,
-            duration: 0.4,
-            factor: 100,
-            maxSpeed: 50,
-            easing: "ease-out-quad",
           },
           slow: {
             factor: 3,

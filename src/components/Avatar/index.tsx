@@ -38,7 +38,27 @@ const Avatar = () => {
     height: 0,
   });
 
+  const setupCursorAndWindow = () => {
+    cursor.current = {
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2,
+    };
+    cachedCursor.current = { ...cursor.current };
+    windowSize.current = {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+  };
+
   useEffect(() => {
+    setupCursorAndWindow();
+
+    if (!svgRef.current || !displacementMapRef.current) {
+      return;
+    }
+
+    let rafId: number;
+
     const handleResize = () => {
       windowSize.current = {
         width: window.innerWidth,
@@ -110,16 +130,17 @@ const Avatar = () => {
 
       cachedCursor.current = { ...cursor.current };
 
-      requestAnimationFrame(render);
+      rafId = requestAnimationFrame(render);
     };
 
     render();
 
     return () => {
+      cancelAnimationFrame(rafId);
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, []);
+  }, [displacementMapRef]);
 
   return (
     <div className="relative w-[600px] h-[600px]" ref={svgRef}>
@@ -131,9 +152,9 @@ const Avatar = () => {
         <filter id="imgFilter">
           <feTurbulence
             type="turbulence"
-            baseFrequency="0.015"
-            numOctaves="5"
-            seed="4"
+            baseFrequency="0.1"
+            numOctaves="4"
+            seed="3"
             stitchTiles="stitch"
             x="0%"
             y="0%"
@@ -148,11 +169,6 @@ const Avatar = () => {
             scale="0"
             xChannelSelector="R"
             yChannelSelector="B"
-            x="0%"
-            y="0%"
-            width="100%"
-            height="100%"
-            result="displacementMap3"
           />
         </filter>
         <g>
